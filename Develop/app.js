@@ -22,8 +22,8 @@ inquirer.prompt([
     },
     {
         type: "checkbox",
-        message: "What is your role?",
         name: "role",
+        message: "What is your role?",
         choices: [
             "Manager",
             "Engineer",
@@ -44,41 +44,43 @@ inquirer.prompt([
         type: "input",
         name: "id",
         message: "What is your ID?"
-    }]).then(answer => {
-        console.info(answer)
-        if (answers.role === "Manager") {
-            inquirer.prompt([
-                {
-                    type: "input",
-                    name: "office",
-                    message: "What is your office number?"
-                }
-            ]).then(answers => {
-                console.info(answers)
-            })
-        }
-        else if (answers.role === "Engineer") {
-            inquirer.prompt([
-                {
-                    type: "input",
-                    name: "github",
-                    message: "What is your github?"
-                }
-            ]).then(answers => {
-                console.info(answers)
-            })
-        }
-        else {
-            inquirer.prompt([
-                {
-                    type: "input",
-                    name: "school",
-                    message: "What is your school"
-                }
-            ]).then(answer => {
-                console.info(answer)
-            })
-        }
+    }]).then(answers => {
+        console.info(answers)
+        // if (answers.role === "Manager") {
+        //     inquirer.prompt([
+        //         {
+        //             type: "input",
+        //             name: "office",
+        //             message: "What is your office number?"
+        //         }
+        //     ]).then(answer => {
+        //         console.info(answer)
+        //     })
+        // }
+        // else if (answers.role === "Engineer") {
+        //     inquirer.prompt([
+        //         {
+        //             type: "input",
+        //             name: "github",
+        //             message: "What is your github?"
+        //         }
+        //     ]).then(answer => {
+        //         console.info(answer)
+        //     })
+        // }
+        // else if (answers.role === "Intern"){
+        //     inquirer.prompt([
+        //         {
+        //             type: "input",
+        //             name: "school",
+        //             message: "What is your school"
+        //         }
+        //     ]).then(answer => {
+        //         console.info(answer)
+        //     })
+        // }
+        // else
+        // {console.info("No role selected")}
     });
 
 // After the user has input all employees desired, call the `render` function (required
