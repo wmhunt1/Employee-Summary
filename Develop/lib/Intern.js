@@ -8,3 +8,4 @@ class Intern extends Employee {
         this.school = school;
     }
 }
+module.exports = Intern;

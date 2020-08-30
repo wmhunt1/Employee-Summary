@@ -9,80 +9,118 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
-
+let employeeArray = [];
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
-inquirer.prompt([
-    {
-        type: "input",
-        name: "name",
-        message: "What is your name?"
-    },
-    {
-        type: "checkbox",
-        name: "role",
-        message: "What is your role?",
-        choices: [
-            "Manager",
-            "Engineer",
-            "Intern"
-        ],
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "What is your email?",
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "What is your ID?"
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "What is your ID?"
-    }]).then(answers => {
+function managerPrompt() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is your manager's name?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your manager's email?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is your manager's ID?"
+        },
+        {
+            type: "input",
+            name: "office",
+            message: "What is your manager's office number?"
+        }
+    ]).then(answers => {
         console.info(answers)
-        // if (answers.role === "Manager") {
-        //     inquirer.prompt([
-        //         {
-        //             type: "input",
-        //             name: "office",
-        //             message: "What is your office number?"
-        //         }
-        //     ]).then(answer => {
-        //         console.info(answer)
-        //     })
-        // }
-        // else if (answers.role === "Engineer") {
-        //     inquirer.prompt([
-        //         {
-        //             type: "input",
-        //             name: "github",
-        //             message: "What is your github?"
-        //         }
-        //     ]).then(answer => {
-        //         console.info(answer)
-        //     })
-        // }
-        // else if (answers.role === "Intern"){
-        //     inquirer.prompt([
-        //         {
-        //             type: "input",
-        //             name: "school",
-        //             message: "What is your school"
-        //         }
-        //     ]).then(answer => {
-        //         console.info(answer)
-        //     })
-        // }
-        // else
-        // {console.info("No role selected")}
-    });
-
+        let manager = new Manager(answers.name, answers.email, answers.id, answers.office)
+        employeeArray.push(manager)
+        employeePrompt()
+    })
+}
+function employeePrompt() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "nameEmployee",
+            message: "What is your employees name?"
+        },
+        {
+            //switched to input because list didn't work
+            type: "input",
+            name: "roleEmployee",
+            message: "What is your employee's role? (Engineer), (Intern), or other",
+            choices: [
+                "Engineer",
+                "Intern"
+            ],
+        },
+        {
+            type: "input",
+            name: "emailEmployee",
+            message: "What is your employee's email?",
+        },
+        {
+            type: "input",
+            name: "idEmployee",
+            message: "What is your employee's ID?"
+        }]).then(answers => {
+            console.info(answers)
+            let name = answers.nameEmployee;
+            let email = answers.emailEmployee;
+            let role = answers.roleEmployee;
+            let id = answers.idEmployee
+            if (role === "Engineer") {
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "github",
+                        message: "What is your engineer's github?"
+                    }
+                ]).then(answer => {
+                    console.info(answer)
+                    let engineer = new Engineer(name, email, id, answers.github)
+                    employeeArray.push(engineer)
+                })
+            }
+            else if (role === "Intern") {
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "school",
+                        message: "What is your intern's school"
+                    }
+                ]).then(answer => {
+                    console.info(answer)
+                    let intern = new Intern(name, email, id, answers.school)
+                    employeeArray.push(intern)
+                })
+            }
+            else {
+                console.info("No role selected")
+                let worker = new Employee(name, email, id)
+                employeeArray.push(worker)
+            }
+            inquirer.prompt([
+                {
+                    name: "moreEmployees",
+                    message: "Do you have more employees?",
+                    choices: ["Yes", "No"]
+                }
+            ]).then(answer => {
+                if (answer.moreEmployees === "Yes") {
+                    employeePrompt()
+                }
+                else {console.info(employeeArray)}
+            })
+        });
+}
+managerPrompt()
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
