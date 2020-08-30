@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-let employeeArray = [];
+let employees = [];
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 function managerPrompt() {
@@ -38,8 +38,8 @@ function managerPrompt() {
         }
     ]).then(answers => {
         console.info(answers)
-        let manager = new Manager(answers.name, answers.email, answers.id, answers.office)
-        employeeArray.push(manager)
+        let employee = new Manager(answers.name, answers.email, answers.id, answers.office)
+        employees.push(employee)
         employeePrompt()
     })
 }
@@ -84,8 +84,8 @@ function employeePrompt() {
                     }
                 ]).then(answer => {
                     console.info(answer)
-                    let engineer = new Engineer(name, email, id, answers.github)
-                    employeeArray.push(engineer)
+                    let employee = new Engineer(name, email, id, answers.github)
+                    employees.push(employee)
                     inquirer.prompt([
                         {
                             name: "moreEmployees",
@@ -97,7 +97,7 @@ function employeePrompt() {
                             employeePrompt()
                         }
                         else {
-                            console.info(employeeArray)
+                            console.info(employees)
                             render()
                         }
                     })
@@ -112,8 +112,8 @@ function employeePrompt() {
                     }
                 ]).then(answer => {
                     console.info(answer)
-                    let intern = new Intern(name, email, id, answers.school)
-                    employeeArray.push(intern)
+                    let employee = new Intern(name, email, id, answers.school)
+                    employees.push(employee)
                     inquirer.prompt([
                         {
                             name: "moreEmployees",
@@ -125,16 +125,16 @@ function employeePrompt() {
                             employeePrompt()
                         }
                         else {
-                            console.info(employeeArray)
+                            console.info(employees)
                             render()
                         }
                     })
                 })
             }
             else {
-                console.info("No role selected")
-                let worker = new Employee(name, email, id)
-                employeeArray.push(worker)
+                console.info("No role selected, employee not being added")
+                //let worker = new Employee(name, email, id)
+                //employeeArray.push(worker)
                 inquirer.prompt([
                     {
                         name: "moreEmployees",
@@ -146,7 +146,7 @@ function employeePrompt() {
                         employeePrompt()
                     }
                     else {
-                        console.info(employeeArray)
+                        console.info(employees)
                         render()
                     }
 
