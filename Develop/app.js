@@ -54,7 +54,7 @@ function employeePrompt() {
             //switched to input because list didn't work
             type: "input",
             name: "roleEmployee",
-            message: "What is your employee's role? (Engineer), (Intern), or other",
+            message: "What is your employee's role? (Engineer), (Intern), or other?",
             choices: [
                 "Engineer",
                 "Intern"
@@ -86,6 +86,19 @@ function employeePrompt() {
                     console.info(answer)
                     let engineer = new Engineer(name, email, id, answers.github)
                     employeeArray.push(engineer)
+                    inquirer.prompt([
+                        {
+                            name: "moreEmployees",
+                            message: "Do you have more employees?",
+                            choices: ["Yes", "No"]
+                        }
+                    ]).then(answer => {
+                        if (answer.moreEmployees === "Yes") {
+                            employeePrompt()
+                        }
+                        else {console.info(employeeArray)}
+                        renderPage()
+                    })
                 })
             }
             else if (role === "Intern") {
@@ -99,26 +112,39 @@ function employeePrompt() {
                     console.info(answer)
                     let intern = new Intern(name, email, id, answers.school)
                     employeeArray.push(intern)
+                    inquirer.prompt([
+                        {
+                            name: "moreEmployees",
+                            message: "Do you have more employees?",
+                            choices: ["Yes", "No"]
+                        }
+                    ]).then(answer => {
+                        if (answer.moreEmployees === "Yes") {
+                            employeePrompt()
+                        }
+                        else {console.info(employeeArray)}
+                        renderPage()
+                    })
                 })
             }
             else {
                 console.info("No role selected")
                 let worker = new Employee(name, email, id)
                 employeeArray.push(worker)
+                inquirer.prompt([
+                    {
+                        name: "moreEmployees",
+                        message: "Do you have more employees?",
+                        choices: ["Yes", "No"]
+                    }
+                ]).then(answer => {
+                    if (answer.moreEmployees === "Yes") {
+                        employeePrompt()
+                    }
+                    else {console.info(employeeArray)}
+                    renderPage()
+                })
             }
-            inquirer.prompt([
-                {
-                    name: "moreEmployees",
-                    message: "Do you have more employees?",
-                    choices: ["Yes", "No"]
-                }
-            ]).then(answer => {
-                if (answer.moreEmployees === "Yes") {
-                    employeePrompt()
-                }
-                else {console.info(employeeArray)}
-                renderPage()
-            })
         });
 }
 managerPrompt()
