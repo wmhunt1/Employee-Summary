@@ -133,8 +133,6 @@ function employeePrompt() {
             }
             else {
                 console.info("No role selected, employee not being added")
-                //let worker = new Employee(name, email, id)
-                //employeeArray.push(worker)
                 inquirer.prompt([
                     {
                         name: "moreEmployees",
