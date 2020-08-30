@@ -117,10 +117,28 @@ function employeePrompt() {
                     employeePrompt()
                 }
                 else {console.info(employeeArray)}
+                renderPage()
             })
         });
 }
 managerPrompt()
+
+function renderPage()
+{
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <title>Document</title>
+    </head>
+    <body>
+    <h1>Employee Summary</h1>
+    </body>
+    </html>`;
+}
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
