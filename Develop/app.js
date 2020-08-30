@@ -44,39 +44,36 @@ inquirer.prompt([
         type: "input",
         name: "id",
         message: "What is your ID?"
-    },
-    {
-        when: function () {
-            if (responses.role === "Manager") {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "office",
-                        message: "What is your office number?"
-                    }
-                ])
-            }
-            else if (responses.role === "Engineer") {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "github",
-                        message: "What is your github?"
-                    }
-                ])
-            }
-            else {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        name: "github",
-                        message: "What school do you go to?"
-                    }
-                ])
-            }
+    }]).then(answers => {
+        if (answers.role === "Manager") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "office",
+                    message: "What is your office number?"
+                }
+            ])
         }
-    }
-])
+        else if (answers.role === "Engineer") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "github",
+                    message: "What is your github?"
+                }
+            ])
+        }
+        else {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "school",
+                    message: "What is your school"
+                }
+            ])
+        }
+    });
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
