@@ -44,7 +44,8 @@ inquirer.prompt([
         type: "input",
         name: "id",
         message: "What is your ID?"
-    }]).then(answers => {
+    }]).then(answer => {
+        console.info(answer)
         if (answers.role === "Manager") {
             inquirer.prompt([
                 {
@@ -52,7 +53,9 @@ inquirer.prompt([
                     name: "office",
                     message: "What is your office number?"
                 }
-            ])
+            ]).then(answers => {
+                console.info(answers)
+            })
         }
         else if (answers.role === "Engineer") {
             inquirer.prompt([
@@ -61,7 +64,9 @@ inquirer.prompt([
                     name: "github",
                     message: "What is your github?"
                 }
-            ])
+            ]).then(answers => {
+                console.info(answers)
+            })
         }
         else {
             inquirer.prompt([
@@ -70,7 +75,9 @@ inquirer.prompt([
                     name: "school",
                     message: "What is your school"
                 }
-            ])
+            ]).then(answer => {
+                console.info(answer)
+            })
         }
     });
 
