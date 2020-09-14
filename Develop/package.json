@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/wmhunt1/Employee-Summary/issues"
   },
-  "homepage": "https://github.com/wmhunt1/Employee-Summary#readme"
+  "homepage": "https://github.com/wmhunt1/Employee-Summary#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
 }
