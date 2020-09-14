@@ -1,0 +1,26 @@
+{
+  "name": "develop",
+  "version": "1.0.0",
+  "description": "see readme",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmhunt1/Employee-Summary.git"
+  },
+  "keywords": [
+    "inquirer"
+  ],
+  "author": "Warren Hunt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wmhunt1/Employee-Summary/issues"
+  },
+  "homepage": "https://github.com/wmhunt1/Employee-Summary#readme"
+}

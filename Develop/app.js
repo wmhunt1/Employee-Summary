@@ -38,8 +38,8 @@ function managerPrompt() {
         }
     ]).then(answers => {
         console.info(answers)
-        let employee = new Manager(answers.name, answers.email, answers.id, answers.office)
-        employees.push(employee)
+        let manager = new Manager(answers.name, answers.email, answers.id, answers.office)
+        employees.push(manager)
         employeePrompt()
     })
 }
@@ -84,8 +84,9 @@ function employeePrompt() {
                     }
                 ]).then(answer => {
                     console.info(answer)
-                    let employee = new Engineer(name, email, id, answers.github)
-                    employees.push(employee)
+                    let github = answers.github
+                    let engineer = new Engineer(name, email, id, github)
+                    employees.push(engineer)
                     inquirer.prompt([
                         {
                             name: "moreEmployees",
@@ -112,8 +113,9 @@ function employeePrompt() {
                     }
                 ]).then(answer => {
                     console.info(answer)
-                    let employee = new Intern(name, email, id, answers.school)
-                    employees.push(employee)
+                    let school = answers.school
+                    let intern = new Intern(name, email, id, school)
+                    employees.push(intern)
                     inquirer.prompt([
                         {
                             name: "moreEmployees",
